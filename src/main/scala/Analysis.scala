@@ -63,9 +63,14 @@ object Analysis {
     //graph.vertices.filter{ case (id, (a, b, c)) => b == "LuxMeter" }.count
 
     //create triplets from the menuLabel param.
-    val facts: RDD[String] = graph.triplets.map(triplet => triplet.srcAttr._1 + " is " + triplet.attr + " of " + triplet.dstAttr._1)
+    val facts: RDD[String] = graph.triplets.map(triplet => triplet.srcAttr._1 + " is " + triplet.attr + " of " + triplet.dstAttr._1).collect.foreach(println(_))
     //print all the triplets
-    facts.saveAsTextFile("/home/muletto/Desktop/dir")
+
+    val cleanGraph = graph.subgraph(vpred = (id, attr) => attr._2 != null & attr._1 != null)
+
+    cleanGraph.triplets.map(triplet => triplet.srcAttr._1 + " is " + triplet.attr + " of " + triplet.dstAttr._1)
+
+    cleanGraph.saveAsTextFile("/home/muletto/Desktop/dir")
     
 
 
