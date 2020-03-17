@@ -1,0 +1,22 @@
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:3:25: object graphx is not a member of package org.apache.spark[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.graphx._[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:24:38: not found: value explode[0m
+[0m[[0m[31merror[0m] [0m[0m    val dfVertices = jsonFile.select(explode(jsonFile("vertices"))).toDF("vertices")[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:39:35: not found: value explode[0m
+[0m[[0m[31merror[0m] [0m[0m    val dfEdges = jsonFile.select(explode(jsonFile("edges"))).toDF("edges")[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:57:25: not found: type VertexId[0m
+[0m[[0m[31merror[0m] [0m[0m    val verticesG: RDD[(VertexId, (String, String, String))] = etlV.rdd.map(row => (row.getAs[Long]("_id"), (row.getAs[String]("menuLabel"), row.getAs[String]("type"), row.getAs[String]("uri"))))[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:59:21: not found: type Edge[0m
+[0m[[0m[31merror[0m] [0m[0m    val edgesE: RDD[Edge[String]] = etlE.rdd.map(row => Edge(row.getAs[Long]("_inV"), row.getAs[Long]("_outV"), row.getAs[String]("_label")))[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:59:57: not found: value Edge[0m
+[0m[[0m[31merror[0m] [0m[0m    val edgesE: RDD[Edge[String]] = etlE.rdd.map(row => Edge(row.getAs[Long]("_inV"), row.getAs[Long]("_outV"), row.getAs[String]("_label")))[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/muletto/Stefano/GraphxOverview/src/main/scala/Analysis.scala:61:17: not found: value Graph[0m
+[0m[[0m[31merror[0m] [0m[0m    val graph = Graph(verticesG, edgesE)[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0m7 errors found[0m
