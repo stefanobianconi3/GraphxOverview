@@ -75,12 +75,12 @@ object Analysis {
 
     cleanGraph.triplets.map(triplet => triplet.srcAttr._1 + " is " + triplet.attr + " of " + triplet.dstAttr._1)
 
-    cleanGraph.saveAsTextFile("/home/muletto/Desktop/dir")
+    cleanGraph.saveAsTextFile("/home/Stefano/Desktop/dir")
     
     val ranks = graph.pageRank(0.0001)
 
     val printranks = ranks.vertices.map(r => "vertex id: " +r._1+ " with rank: " + r._2)
-    printranks.saveAsTextFile("/home/muletto/Desktop/dir2")
+    printranks.saveAsTextFile("/home/Stefano/Desktop/dir2")
 
     spark.stop()
   }
