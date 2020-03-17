@@ -15,7 +15,7 @@ object Analysis {
     Load the JSON file called demo.graph.json; 
     path: /home/muletto/Stefano/EDA/exam/demo.graph.json
     */
-    val jsonFile = spark.read.json("/home/muletto/Stefano/EDA/exam/demo.graph.json")
+    val jsonFile = spark.read.json("data/demo.graph.json")
     
     //jsonFile.show()
     //jsonFile.printSchema()
@@ -82,17 +82,6 @@ object Analysis {
     val printranks = ranks.vertices.map(r => "vertex id: " +r._1+ " with rank: " + r._2)
     printranks.saveAsTextFile("/home/muletto/Desktop/dir2")
 
-
-
-
-
-
-
-
-
-
-
-    println(s"Lines with a: $numAs, Lines with b: $numBs")
     spark.stop()
   }
 }
