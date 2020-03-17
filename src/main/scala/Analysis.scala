@@ -54,7 +54,7 @@ object Analysis {
     etlV.dropDuplicates("_id")
 
     //create variable to be inserted later inside the grap
-    val verticesG: RDD[(VertexId, (String, String, String))] = etlV.rdd.map(row => (row.getAs[Long]("_id"), (row.getAs[String]("menuLabel"), row.getAs[String]("type"), row.getAs[String]("type"))))
+    val verticesG: RDD[(VertexId, (String, String, String))] = etlV.rdd.map(row => (row.getAs[Long]("_id"), (row.getAs[String]("menuLabel"), row.getAs[String]("type"), row.getAs[String]("uri"))))
 
     val edgesE: RDD[Edge[String]] = etlE.rdd.map(row => Edge(row.getAs[Long]("_inV"), row.getAs[Long]("_outV"), row.getAs[String]("_label")))
 
@@ -63,8 +63,13 @@ object Analysis {
     //graph.vertices.filter{ case (id, (a, b, c)) => b == "LuxMeter" }.count
 
     //create triplets from the menuLabel param.
-    val facts: RDD[String] = graph.triplets.map(triplet => triplet.srcAttr._1 + " is " + triplet.attr + " of " + triplet.dstAttr._1).collect.foreach(println(_))
+    val facts: RDD[String] = graph.triplets.map(triplet => triplet.srcAttr._1 + " is " + triplet.attr + " of " + triplet.dstAttr._1)
+    //facts.collect.foreach(println(_))
     //print all the triplets
+
+    val indegree = graph.inDegrees
+
+    val outdegree = graph.outDegrees
 
     val cleanGraph = graph.subgraph(vpred = (id, attr) => attr._2 != null & attr._1 != null)
 
@@ -72,8 +77,10 @@ object Analysis {
 
     cleanGraph.saveAsTextFile("/home/muletto/Desktop/dir")
     
+    val ranks = graph.pageRank(0.0001)
 
-
+    val printranks = ranks.vertices.map(r => "vertex id: " +r._1+ " with rank: " + r._2)
+    printranks.saveAsTextFile("/home/muletto/Desktop/dir2")
 
 
 
